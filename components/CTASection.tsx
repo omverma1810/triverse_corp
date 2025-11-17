@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion';
 import { ArrowRight, Clock, Shield, FileCheck } from 'lucide-react';
-import { fadeInUp, scaleIn, pulseAnimation } from '@/lib/animations';
 
 const CTASection = () => {
   const trustIndicators = [
@@ -58,10 +57,7 @@ const CTASection = () => {
       <div className="container-custom relative z-10">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
-            variants={fadeInUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
+            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
           >
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
               Ready to{' '}
@@ -71,11 +67,10 @@ const CTASection = () => {
           </motion.div>
 
           <motion.p
-            variants={fadeInUp}
-            initial="hidden"
-            whileInView="visible"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
             className="text-xl md:text-2xl text-text-light mb-12"
           >
             Join 9+ successful companies who chose Triverse Corp to build their
@@ -84,11 +79,10 @@ const CTASection = () => {
 
           {/* CTA Button */}
           <motion.div
-            variants={scaleIn}
-            initial="hidden"
-            whileInView="visible"
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.4 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
             className="mb-12"
           >
             <motion.a
@@ -104,7 +98,6 @@ const CTASection = () => {
             <motion.p
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
               transition={{ delay: 0.6 }}
               className="text-text-light mt-4"
             >
@@ -116,7 +109,6 @@ const CTASection = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
             transition={{ delay: 0.8 }}
             className="flex flex-col md:flex-row justify-center items-center gap-8 md:gap-12"
           >
@@ -125,7 +117,6 @@ const CTASection = () => {
                 key={indicator.text}
                 initial={{ opacity: 0, scale: 0 }}
                 whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
                 transition={{ delay: 1 + index * 0.1 }}
                 className="flex items-center space-x-3 text-white"
               >
