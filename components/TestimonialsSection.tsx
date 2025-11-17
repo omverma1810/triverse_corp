@@ -116,7 +116,7 @@ const TestimonialsSection = () => {
               </div>
 
               {/* Quote Text */}
-              <p className="text-text-dark text-lg md:text-2xl leading-relaxed mb-10 text-center italic font-light relative z-10" style={{
+              <p className="text-text-medium text-lg md:text-2xl leading-relaxed mb-10 text-center italic font-light relative z-10" style={{
                 lineHeight: '1.8',
               }}>
                 "{testimonials[currentIndex].quote}"
