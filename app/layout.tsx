@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { CustomCursor } from '@/components/ui/CustomCursor';
 
 export const metadata: Metadata = {
   title: 'Triverse Corp - Transform Your Vision Into Market-Leading Software',
@@ -41,7 +42,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className="antialiased">
+      <body className="antialiased" style={{ cursor: 'none' }}>
+        <CustomCursor />
         <Navbar />
         <main>{children}</main>
         <Footer />
