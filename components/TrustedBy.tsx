@@ -1,10 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { fadeInUp } from '@/lib/animations';
 
 const TrustedBy = () => {
-  // Client logos/names (using text for now, can be replaced with actual logos)
   const clients = [
     'Piatrika Biosystems',
     'GraySwipe',
@@ -24,16 +22,16 @@ const TrustedBy = () => {
     <section className="bg-light-bg py-16">
       <div className="container-custom">
         <motion.div
-          variants={fadeInUp}
-          initial="hidden"
-          whileInView="visible"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-text-dark mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-navy mb-4">
             Trusted by Innovative Companies
           </h2>
-          <p className="text-text-light text-lg">
+          <p className="text-gray-600 text-lg">
             T-Hub Startups | 5-Star Hotels | Rs. 1M+ Revenue Businesses
           </p>
         </motion.div>
@@ -55,15 +53,14 @@ const TrustedBy = () => {
             }}
           >
             {duplicatedClients.map((client, index) => (
-              <motion.div
+              <div
                 key={`${client}-${index}`}
                 className="flex-shrink-0 px-8"
-                whileHover={{ scale: 1.1 }}
               >
-                <div className="text-2xl font-bold text-text-dark/30 hover:text-deep-purple transition-colors duration-300 whitespace-nowrap">
+                <div className="text-2xl font-bold text-navy/30 hover:text-purple transition-colors duration-300 whitespace-nowrap cursor-pointer">
                   {client}
                 </div>
-              </motion.div>
+              </div>
             ))}
           </motion.div>
         </div>

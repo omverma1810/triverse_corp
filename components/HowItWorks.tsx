@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion';
 import { Phone, Code, Rocket } from 'lucide-react';
-import { fadeInUp, staggerContainer, staggerItem } from '@/lib/animations';
 
 const HowItWorks = () => {
   const steps = [
@@ -36,10 +35,7 @@ const HowItWorks = () => {
 
       <div className="container-custom relative z-10">
         <motion.div
-          variants={fadeInUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
+          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
@@ -52,10 +48,7 @@ const HowItWorks = () => {
         </motion.div>
 
         <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
+          initial="hidden" whileInView="visible" viewport={{ once: true }}
           className="relative"
         >
           {/* Desktop Timeline */}
@@ -65,7 +58,6 @@ const HowItWorks = () => {
               <motion.div
                 initial={{ scaleX: 0 }}
                 whileInView={{ scaleX: 1 }}
-                viewport={{ once: true }}
                 transition={{ duration: 1.5, delay: 0.5 }}
                 className="absolute top-20 left-0 right-0 h-1 bg-gradient-to-r from-electric-blue via-deep-purple to-vibrant-pink origin-left"
                 style={{ top: '80px' }}
@@ -74,7 +66,7 @@ const HowItWorks = () => {
               {steps.map((step, index) => (
                 <motion.div
                   key={step.number}
-                  variants={staggerItem}
+                  initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
                   className="flex-1 relative"
                 >
                   <div className="flex flex-col items-center">
@@ -113,7 +105,7 @@ const HowItWorks = () => {
             {steps.map((step, index) => (
               <motion.div
                 key={step.number}
-                variants={staggerItem}
+                initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
                 className="flex gap-6"
               >
                 {/* Left Side - Number and Line */}

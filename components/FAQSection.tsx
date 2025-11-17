@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, Minus } from 'lucide-react';
-import { fadeInUp, staggerContainer, staggerItem } from '@/lib/animations';
 
 const FAQSection = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -49,10 +48,7 @@ const FAQSection = () => {
     <section className="section-padding bg-dark-bg">
       <div className="container-custom">
         <motion.div
-          variants={fadeInUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
+          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
@@ -64,16 +60,13 @@ const FAQSection = () => {
         </motion.div>
 
         <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
+          initial="hidden" whileInView="visible" viewport={{ once: true }}
           className="max-w-3xl mx-auto space-y-4"
         >
           {faqs.map((faq, index) => (
             <motion.div
               key={index}
-              variants={staggerItem}
+              initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
               className="bg-white/5 backdrop-blur-md rounded-xl border border-white/10 overflow-hidden hover:border-electric-blue/50 transition-colors duration-300"
             >
               <button

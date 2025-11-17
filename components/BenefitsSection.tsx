@@ -9,7 +9,6 @@ import {
   Infinity,
   DollarSign,
 } from 'lucide-react';
-import { fadeInUp, staggerContainer, staggerItem } from '@/lib/animations';
 
 const BenefitsSection = () => {
   const benefits = [
@@ -57,10 +56,7 @@ const BenefitsSection = () => {
     }}>
       <div className="container-custom">
         <motion.div
-          variants={fadeInUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
+          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-text-dark mb-6">
@@ -72,16 +68,13 @@ const BenefitsSection = () => {
         </motion.div>
 
         <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
+          initial="hidden" whileInView="visible" viewport={{ once: true }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
           {benefits.map((benefit, index) => (
             <motion.div
               key={benefit.title}
-              variants={staggerItem}
+              initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
               whileHover={{
                 scale: 1.05,
                 y: -8,
