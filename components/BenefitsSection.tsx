@@ -52,7 +52,9 @@ const BenefitsSection = () => {
   ];
 
   return (
-    <section className="section-padding bg-light-bg">
+    <section className="section-padding" style={{
+      background: 'linear-gradient(180deg, #F8F9FB 0%, #FFFFFF 100%)',
+    }}>
       <div className="container-custom">
         <motion.div
           variants={fadeInUp}
@@ -61,10 +63,10 @@ const BenefitsSection = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-text-dark mb-4">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-text-dark mb-6">
             Why Choose <span className="gradient-text">Triverse Corp</span>?
           </h2>
-          <p className="text-text-light text-lg max-w-2xl mx-auto">
+          <p className="text-text-light text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
             We deliver results that transform your business
           </p>
         </motion.div>
@@ -82,27 +84,38 @@ const BenefitsSection = () => {
               variants={staggerItem}
               whileHover={{
                 scale: 1.05,
-                rotate: 1,
-                boxShadow: '0 20px 40px rgba(108, 92, 231, 0.3)',
+                y: -8,
               }}
-              className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 group"
+              className="bg-white rounded-3xl p-10 shadow-lg hover:shadow-2xl transition-all duration-300 group relative overflow-hidden"
+              style={{
+                background: 'linear-gradient(135deg, #FFFFFF 0%, #F8F9FB 100%)',
+                border: '2px solid rgba(108, 92, 231, 0.1)',
+              }}
             >
+              {/* Background Gradient Effect */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{
+                background: 'radial-gradient(circle at 50% 0%, rgba(0, 217, 255, 0.05) 0%, transparent 70%)',
+              }}></div>
+
               {/* Icon */}
               <motion.div
-                whileHover={{ rotate: 360 }}
+                whileHover={{ rotate: 360, scale: 1.1 }}
                 transition={{ duration: 0.6 }}
-                className="w-14 h-14 rounded-full bg-gradient-to-br from-electric-blue to-deep-purple flex items-center justify-center mb-6"
+                className="w-16 h-16 rounded-full bg-gradient-to-br from-electric-blue to-deep-purple flex items-center justify-center mb-6 relative z-10"
+                style={{
+                  boxShadow: '0 8px 24px rgba(108, 92, 231, 0.25)',
+                }}
               >
-                <benefit.icon className="w-7 h-7 text-white" />
+                <benefit.icon className="w-8 h-8 text-white" />
               </motion.div>
 
               {/* Title */}
-              <h3 className="text-xl font-bold text-text-dark mb-3 group-hover:text-deep-purple transition-colors duration-300">
+              <h3 className="text-2xl font-bold text-text-dark mb-4 group-hover:text-deep-purple transition-colors duration-300 relative z-10">
                 {benefit.title}
               </h3>
 
               {/* Description */}
-              <p className="text-text-light leading-relaxed">
+              <p className="text-text-light leading-relaxed text-base relative z-10">
                 {benefit.description}
               </p>
             </motion.div>

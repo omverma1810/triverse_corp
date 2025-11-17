@@ -49,7 +49,9 @@ const TestimonialsSection = () => {
   };
 
   return (
-    <section className="section-padding bg-light-bg">
+    <section className="section-padding" style={{
+      background: 'linear-gradient(180deg, #FFFFFF 0%, #F8F9FB 100%)',
+    }}>
       <div className="container-custom">
         <motion.div
           variants={fadeInUp}
@@ -58,10 +60,10 @@ const TestimonialsSection = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-text-dark mb-4">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-text-dark mb-6">
             Loved by <span className="gradient-text">Clients Worldwide</span>
           </h2>
-          <p className="text-text-light text-lg max-w-2xl mx-auto">
+          <p className="text-text-light text-lg md:text-xl max-w-2xl mx-auto">
             Don't just take our word for it - hear from our satisfied clients
           </p>
         </motion.div>
@@ -70,18 +72,18 @@ const TestimonialsSection = () => {
           {/* Navigation Buttons */}
           <button
             onClick={prevTestimonial}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-12 lg:-translate-x-16 z-10 w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center text-deep-purple hover:bg-deep-purple hover:text-white transition-all duration-300"
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-12 lg:-translate-x-16 z-10 w-14 h-14 rounded-full bg-white shadow-xl flex items-center justify-center text-deep-purple hover:bg-gradient-to-br hover:from-electric-blue hover:to-deep-purple hover:text-white transition-all duration-300 border-2 border-deep-purple/20 hover:border-transparent hover:scale-110"
             aria-label="Previous testimonial"
           >
-            <ChevronLeft size={24} />
+            <ChevronLeft size={26} />
           </button>
 
           <button
             onClick={nextTestimonial}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-12 lg:translate-x-16 z-10 w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center text-deep-purple hover:bg-deep-purple hover:text-white transition-all duration-300"
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-12 lg:translate-x-16 z-10 w-14 h-14 rounded-full bg-white shadow-xl flex items-center justify-center text-deep-purple hover:bg-gradient-to-br hover:from-electric-blue hover:to-deep-purple hover:text-white transition-all duration-300 border-2 border-deep-purple/20 hover:border-transparent hover:scale-110"
             aria-label="Next testimonial"
           >
-            <ChevronRight size={24} />
+            <ChevronRight size={26} />
           </button>
 
           {/* Testimonial Cards */}
@@ -92,11 +94,15 @@ const TestimonialsSection = () => {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -100 }}
               transition={{ duration: 0.5 }}
-              className="bg-white rounded-2xl p-8 md:p-12 shadow-2xl relative"
+              className="bg-white rounded-3xl p-10 md:p-14 shadow-2xl relative overflow-hidden"
+              style={{
+                background: 'linear-gradient(135deg, #FFFFFF 0%, #F8F9FB 100%)',
+                boxShadow: '0 20px 60px rgba(0, 0, 0, 0.15)',
+              }}
             >
               {/* Quote Icon */}
-              <div className="absolute top-8 left-8 text-electric-blue/20">
-                <Quote size={48} />
+              <div className="absolute top-6 left-6 text-electric-blue/15">
+                <Quote size={64} strokeWidth={1.5} />
               </div>
 
               {/* Stars */}
@@ -114,23 +120,27 @@ const TestimonialsSection = () => {
               </div>
 
               {/* Quote Text */}
-              <p className="text-text-dark text-lg md:text-xl leading-relaxed mb-8 text-center italic">
+              <p className="text-text-dark text-lg md:text-2xl leading-relaxed mb-10 text-center italic font-light relative z-10" style={{
+                lineHeight: '1.8',
+              }}>
                 "{testimonials[currentIndex].quote}"
               </p>
 
               {/* Author Info */}
               <div className="text-center">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-electric-blue to-deep-purple mx-auto mb-4 flex items-center justify-center text-white text-2xl font-bold">
+                <div className="w-20 h-20 rounded-full bg-gradient-to-br from-electric-blue to-deep-purple mx-auto mb-5 flex items-center justify-center text-white text-3xl font-bold shadow-lg" style={{
+                  boxShadow: '0 10px 30px rgba(108, 92, 231, 0.3)',
+                }}>
                   {testimonials[currentIndex].author.charAt(0)}
                 </div>
-                <h4 className="text-xl font-bold text-text-dark mb-1">
+                <h4 className="text-xl md:text-2xl font-bold text-text-dark mb-2">
                   {testimonials[currentIndex].author}
                 </h4>
-                <p className="text-text-light">
+                <p className="text-text-light text-base md:text-lg mb-3">
                   {testimonials[currentIndex].role} at{' '}
-                  {testimonials[currentIndex].company}
+                  <span className="font-semibold text-text-dark">{testimonials[currentIndex].company}</span>
                 </p>
-                <span className="inline-block mt-2 px-4 py-1 bg-deep-purple/10 text-deep-purple text-sm rounded-full">
+                <span className="inline-block mt-2 px-5 py-2 bg-gradient-to-r from-electric-blue/10 to-deep-purple/10 text-deep-purple text-sm font-medium rounded-full border border-deep-purple/20">
                   {testimonials[currentIndex].industry}
                 </span>
               </div>

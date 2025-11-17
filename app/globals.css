@@ -56,6 +56,13 @@
 
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+  }
+
+  /* Better font rendering on all devices */
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 
