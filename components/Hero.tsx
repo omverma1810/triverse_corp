@@ -1,8 +1,14 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import dynamic from 'next/dynamic';
 import { ArrowRight, Sparkles, TrendingUp, Users } from 'lucide-react';
+import { Canvas } from '@react-three/fiber';
+import { Environment, OrbitControls } from '@react-three/drei';
+import { Suspense, useState, useEffect } from 'react';
+import { SmartphoneModel } from '@/components/ui/SmartphoneModel';
+import { ParticleNetwork } from '@/components/ui/ParticleNetwork';
+import { LuxuryButton } from '@/components/ui/LuxuryButton';
 import {
   fadeInUp,
   wordStagger,
@@ -10,17 +16,20 @@ import {
   scaleIn,
 } from '@/lib/animations';
 
-// Dynamically import Three.js component to avoid SSR issues
-const ThreeBackground = dynamic(
-  () => import('@/components/ui/ThreeBackground'),
-  { ssr: false }
-);
-
 const Hero = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 1024);
+    const handleResize = () => setIsMobile(window.innerWidth < 1024);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const stats = [
-    { icon: Sparkles, value: '9+', label: 'Projects Delivered' },
-    { icon: TrendingUp, value: '25L+', label: 'Revenue Generated' },
-    { icon: Users, value: '100%', label: 'Client Satisfaction' },
+    { icon: Sparkles, value: '9+', label: 'Projects Delivered', color: '#00D9FF' },
+    { icon: TrendingUp, value: '25L+', label: 'Revenue Generated', color: '#FFD700' },
+    { icon: Users, value: '100%', label: 'Client Satisfaction', color: '#50C878' },
   ];
 
   const techIcons = [
@@ -37,103 +46,124 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-navy-blue via-[#1a1a3e] to-dark-bg pt-20"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
+      style={{
+        background: 'linear-gradient(135deg, #0A0E27 0%, #1A1A2E 50%, #0A0E27 100%)',
+      }}
     >
-      {/* Three.js Background */}
-      <ThreeBackground />
+      {/* Three.js 3D Phone Model - Desktop Only */}
+      {!isMobile && (
+        <div className="absolute right-0 top-0 w-1/2 h-full z-10 pointer-events-none">
+          <Canvas camera={{ position: [0, 0, 5], fov: 50 }}>
+            <Suspense fallback={null}>
+              <ambientLight intensity={0.5} />
+              <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} />
+              <SmartphoneModel scale={1.5} />
+              <ParticleNetwork count={150} />
+              <Environment preset="city" />
+            </Suspense>
+          </Canvas>
+        </div>
+      )}
 
-      {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-navy-blue/50 to-navy-blue -z-5" />
+      {/* Metallic Gradient Overlay */}
+      <div
+        className="absolute inset-0 opacity-30"
+        style={{
+          background: 'linear-gradient(135deg, rgba(0, 217, 255, 0.1) 0%, rgba(108, 92, 231, 0.1) 50%, rgba(255, 215, 0, 0.05) 100%)',
+        }}
+      />
 
-      <div className="container-custom relative z-10">
-        <div className="text-center max-w-5xl mx-auto">
-          {/* Headline with Word Animation */}
+      {/* Animated gradient background */}
+      <div className="absolute inset-0 opacity-20">
+        <div className="absolute inset-0 bg-cosmic-purple animate-gradient-shift" />
+      </div>
+
+      <div className="container-custom relative z-20">
+        <div className="text-center lg:text-left max-w-5xl lg:max-w-3xl mx-auto lg:mx-0">
+          {/* Premium Headline with Luxury Typography */}
           <motion.div
             variants={wordStagger}
             initial="hidden"
             animate="visible"
-            className="mb-6"
+            className="mb-8"
           >
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-display leading-tight text-shadow">
               {[
                 'Transform',
-                'Your',
                 'Vision',
                 'Into',
-                'Market-Leading',
-                'Software',
               ].map((word, index) => (
                 <motion.span
                   key={index}
                   variants={wordFadeIn}
-                  className={`inline-block mr-4 ${
-                    index >= 4 ? 'gradient-text' : 'text-white'
-                  }`}
+                  className="inline-block mr-4 text-pure-white"
                 >
                   {word}
                 </motion.span>
               ))}
+              <br />
+              <motion.span
+                variants={wordFadeIn}
+                className="inline-block gradient-text text-shadow-glow"
+              >
+                Market Leaders
+              </motion.span>
             </h1>
           </motion.div>
 
-          {/* Subheadline */}
+          {/* Premium Subheadline */}
           <motion.p
             variants={fadeInUp}
             initial="hidden"
             animate="visible"
             transition={{ delay: 0.8 }}
-            className="text-lg md:text-xl lg:text-2xl text-text-light mb-12 max-w-4xl mx-auto"
+            className="text-lg md:text-xl lg:text-2xl font-body text-warm-grey mb-12 max-w-3xl mx-auto lg:mx-0"
           >
-            We build enterprise-grade mobile apps, web platforms, and AI
-            solutions that increase revenue by{' '}
-            <span className="text-gold font-semibold">25 lakhs+</span>. Trusted
-            by startups and{' '}
-            <span className="text-emerald-green font-semibold">
-              Rs. 1Cr+ businesses
-            </span>{' '}
+            Enterprise-grade mobile apps, web platforms, and AI solutions that increase revenue by{' '}
+            <span className="gradient-text-gold font-semibold">Rs. 25L+</span>. Trusted by startups and{' '}
+            <span className="text-emerald font-semibold">Rs. 1Cr+ businesses</span>{' '}
             across USA and India.
           </motion.p>
 
-          {/* CTAs */}
+          {/* Luxury CTAs */}
           <motion.div
             variants={scaleIn}
             initial="hidden"
             animate="visible"
             transition={{ delay: 1.2 }}
-            className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16"
+            className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start items-center mb-16"
           >
-            <motion.a
-              href="#contact"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="btn-primary flex items-center space-x-2 group"
+            <LuxuryButton
+              variant="primary"
+              size="lg"
+              icon={<ArrowRight className="w-5 h-5" />}
+              onClick={() => window.location.href = '#contact'}
             >
-              <span>Get Free Consultation</span>
-              <ArrowRight className="group-hover:translate-x-1 transition-transform" />
-            </motion.a>
+              Schedule Consultation
+            </LuxuryButton>
 
-            <motion.a
-              href="#portfolio"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="btn-secondary"
+            <LuxuryButton
+              variant="outline"
+              size="lg"
+              onClick={() => window.location.href = '#portfolio'}
             >
-              View Our Work
-            </motion.a>
+              View Portfolio
+            </LuxuryButton>
           </motion.div>
 
-          {/* Stats Cards */}
+          {/* Premium Stats Cards */}
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.5 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12"
+            className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 max-w-4xl mx-auto lg:mx-0"
           >
             {stats.map((stat, index) => (
               <motion.div
                 key={stat.label}
                 animate={{
-                  y: [0, -20, 0],
+                  y: [0, -10, 0],
                 }}
                 transition={{
                   duration: 6,
@@ -141,33 +171,54 @@ const Hero = () => {
                   ease: 'easeInOut',
                   delay: index * 0.2,
                 }}
-                className="card-hover text-center p-6"
+                className="premium-card text-center p-8 group cursor-pointer"
               >
-                <stat.icon className="w-12 h-12 mx-auto mb-4 text-electric-blue" />
-                <div className="text-3xl md:text-4xl font-bold gradient-text mb-2">
+                <div className="icon-glow-container mb-6">
+                  <div
+                    className="icon-glow mx-auto"
+                    style={{ background: `radial-gradient(circle, ${stat.color} 0%, transparent 70%)` }}
+                  />
+                  <stat.icon
+                    className="w-12 h-12 mx-auto relative z-10"
+                    style={{ color: stat.color }}
+                  />
+                </div>
+                <div
+                  className="text-4xl md:text-5xl font-display font-bold mb-3"
+                  style={{
+                    background: `linear-gradient(135deg, ${stat.color}, ${stat.color}99)`,
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                  }}
+                >
                   {stat.value}
                 </div>
-                <div className="text-text-light">{stat.label}</div>
+                <div className="text-warm-grey font-accent text-sm uppercase tracking-wider">
+                  {stat.label}
+                </div>
               </motion.div>
             ))}
           </motion.div>
 
-          {/* Tech Stack Icons */}
+          {/* Premium Tech Stack */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 2 }}
-            className="flex flex-wrap justify-center items-center gap-6"
+            className="flex flex-wrap justify-center lg:justify-start items-center gap-4 max-w-3xl mx-auto lg:mx-0"
           >
-            <span className="text-text-light text-sm">Powered by:</span>
+            <span className="text-warm-grey font-accent text-sm uppercase tracking-wider">
+              Powered by:
+            </span>
             {techIcons.map((tech, index) => (
               <motion.div
                 key={tech}
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 2 + index * 0.1 }}
-                whileHover={{ scale: 1.2, color: '#00D9FF' }}
-                className="text-text-light hover:text-electric-blue transition-colors duration-300 text-sm font-medium"
+                whileHover={{ scale: 1.1, y: -3 }}
+                className="px-4 py-2 rounded-lg glass-dark text-warm-grey hover:text-electric-blue transition-all duration-300 font-accent text-sm font-medium cursor-pointer border border-white/5 hover:border-electric-blue/50"
               >
                 {tech}
               </motion.div>
@@ -176,24 +227,31 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Scroll Indicator */}
+      {/* Premium Scroll Indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2.5 }}
-        className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
+        className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-30"
       >
         <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 1.5, repeat: Infinity }}
-          className="w-6 h-10 border-2 border-electric-blue rounded-full flex justify-center"
+          className="w-7 h-12 border-2 border-electric-blue rounded-full flex justify-center relative overflow-hidden"
+          style={{
+            background: 'rgba(0, 217, 255, 0.05)',
+            boxShadow: '0 0 20px rgba(0, 217, 255, 0.3)',
+          }}
         >
           <motion.div
-            animate={{ y: [0, 12, 0] }}
+            animate={{ y: [0, 16, 0], opacity: [1, 0.3, 1] }}
             transition={{ duration: 1.5, repeat: Infinity }}
-            className="w-1 h-3 bg-electric-blue rounded-full mt-2"
+            className="w-1.5 h-4 bg-electric-blue rounded-full mt-2 glow"
           />
         </motion.div>
+        <p className="text-warm-grey text-xs font-accent mt-3 text-center uppercase tracking-widest">
+          Scroll
+        </p>
       </motion.div>
     </section>
   );
