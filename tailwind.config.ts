@@ -23,6 +23,12 @@ const config: Config = {
         'navy-blue': '#0A192F',
         'electric-blue': '#00D9FF',
         'deep-purple': '#6C5CE7',
+
+        // Text colors for proper contrast on light backgrounds
+        'text-dark': '#0A192F',      // Dark navy - for headings on light backgrounds
+        'text-medium': '#1A1A2E',    // Dark gray - for body text on light backgrounds
+        'text-light': '#6B7280',     // Medium gray - for subtitles on light backgrounds
+        'text-gray': '#4B5563',      // Dark gray - for descriptions on light backgrounds
       },
       backgroundImage: {
         // Simple gradients

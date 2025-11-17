@@ -108,7 +108,7 @@ const BenefitsSection = () => {
               </h3>
 
               {/* Description */}
-              <p className="text-text-light leading-relaxed text-base relative z-10">
+              <p className="text-text-gray leading-relaxed text-base relative z-10">
                 {benefit.description}
               </p>
             </motion.div>
