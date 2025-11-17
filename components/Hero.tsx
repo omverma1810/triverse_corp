@@ -1,13 +1,7 @@
 'use client';
 
-import { motion, useScroll, useTransform } from 'framer-motion';
-import dynamic from 'next/dynamic';
+import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles, TrendingUp, Users } from 'lucide-react';
-import { Canvas } from '@react-three/fiber';
-import { Environment, OrbitControls } from '@react-three/drei';
-import { Suspense, useState, useEffect } from 'react';
-import { SmartphoneModel } from '@/components/ui/SmartphoneModel';
-import { ParticleNetwork } from '@/components/ui/ParticleNetwork';
 import { LuxuryButton } from '@/components/ui/LuxuryButton';
 import {
   fadeInUp,
@@ -17,14 +11,6 @@ import {
 } from '@/lib/animations';
 
 const Hero = () => {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    setIsMobile(window.innerWidth < 1024);
-    const handleResize = () => setIsMobile(window.innerWidth < 1024);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   const stats = [
     { icon: Sparkles, value: '9+', label: 'Projects Delivered', color: '#00D9FF' },
@@ -51,21 +37,6 @@ const Hero = () => {
         background: 'linear-gradient(135deg, #0A0E27 0%, #1A1A2E 50%, #0A0E27 100%)',
       }}
     >
-      {/* Three.js 3D Phone Model - Desktop Only */}
-      {!isMobile && (
-        <div className="absolute right-0 top-0 w-1/2 h-full z-10 pointer-events-none">
-          <Canvas camera={{ position: [0, 0, 5], fov: 50 }}>
-            <Suspense fallback={null}>
-              <ambientLight intensity={0.5} />
-              <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} />
-              <SmartphoneModel scale={1.5} />
-              <ParticleNetwork count={150} />
-              <Environment preset="city" />
-            </Suspense>
-          </Canvas>
-        </div>
-      )}
-
       {/* Metallic Gradient Overlay */}
       <div
         className="absolute inset-0 opacity-30"
@@ -208,7 +179,7 @@ const Hero = () => {
             transition={{ delay: 2 }}
             className="flex flex-wrap justify-center lg:justify-start items-center gap-4 max-w-3xl mx-auto lg:mx-0"
           >
-            <span className="text-warm-grey font-accent text-sm uppercase tracking-wider">
+            <span className="text-white/60 font-accent text-sm uppercase tracking-wider font-semibold">
               Powered by:
             </span>
             {techIcons.map((tech, index) => (
@@ -218,7 +189,10 @@ const Hero = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 2 + index * 0.1 }}
                 whileHover={{ scale: 1.1, y: -3 }}
-                className="px-4 py-2 rounded-lg glass-dark text-warm-grey hover:text-electric-blue transition-all duration-300 font-accent text-sm font-medium cursor-pointer border border-white/5 hover:border-electric-blue/50"
+                className="px-5 py-2.5 rounded-full bg-white/5 text-white hover:text-electric-blue transition-all duration-300 font-accent text-sm font-medium cursor-pointer border border-white/10 hover:border-electric-blue/50 hover:bg-white/10"
+                style={{
+                  backdropFilter: 'blur(10px)',
+                }}
               >
                 {tech}
               </motion.div>

@@ -28,9 +28,11 @@ const trustItems = [
 
 export function TrustBar() {
   return (
-    <div className="w-full bg-charcoal/50 backdrop-blur-lg border-y border-white/10 py-6">
+    <div className="w-full bg-[#1A1A2E] border-y border-white/10 py-8" style={{
+      background: 'linear-gradient(135deg, #1A1A2E 0%, #0A0E27 100%)',
+    }}>
       <div className="container-custom">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {trustItems.map((item, index) => (
             <motion.div
               key={index}
@@ -39,11 +41,13 @@ export function TrustBar() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
               viewport={{ once: true }}
+              whileHover={{ scale: 1.05 }}
             >
               <div
-                className="p-3 rounded-full"
+                className="p-3 rounded-full flex-shrink-0"
                 style={{
                   background: `${item.color}20`,
+                  boxShadow: `0 0 20px ${item.color}30`,
                 }}
               >
                 <item.icon
@@ -51,7 +55,7 @@ export function TrustBar() {
                   style={{ color: item.color }}
                 />
               </div>
-              <span className="text-sm md:text-base font-accent text-warm-grey">
+              <span className="text-sm md:text-base font-accent text-white font-medium whitespace-nowrap">
                 {item.text}
               </span>
             </motion.div>

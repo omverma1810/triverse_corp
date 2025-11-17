@@ -56,7 +56,9 @@ const ContactSection = () => {
   ];
 
   return (
-    <section id="contact" className="section-padding bg-light-bg">
+    <section id="contact" className="section-padding" style={{
+      background: 'linear-gradient(180deg, #FFFFFF 0%, #F8F9FB 100%)',
+    }}>
       <div className="container-custom">
         <motion.div
           variants={fadeInUp}
@@ -65,12 +67,14 @@ const ContactSection = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-text-dark mb-4">
-            Let's Build Something{' '}
-            <span className="gradient-text">Amazing Together</span>
+          <div className="text-5xl mb-6">📧</div>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-text-dark mb-6">
+            Amazing{' '}
+            <span className="gradient-text">Together</span>
           </h2>
-          <p className="text-text-light text-lg max-w-2xl mx-auto">
-            Tell us about your project and we'll get back to you within 24 hours
+          <p className="text-text-light text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
+            Let's transform your vision into reality. Share your project details and
+            we'll respond within 24 hours with a detailed proposal.
           </p>
         </motion.div>
 
@@ -144,7 +148,10 @@ const ContactSection = () => {
               whileInView="visible"
               viewport={{ once: true }}
               onSubmit={handleSubmit(onSubmit)}
-              className="bg-white rounded-2xl p-8 shadow-xl space-y-6"
+              className="bg-white rounded-3xl p-10 md:p-12 shadow-2xl space-y-6"
+              style={{
+                boxShadow: '0 20px 60px rgba(0, 0, 0, 0.1)',
+              }}
             >
               {/* Success Message */}
               {isSubmitted && (
@@ -162,17 +169,20 @@ const ContactSection = () => {
 
               {/* Name */}
               <motion.div variants={staggerItem}>
-                <label className="block text-text-dark font-semibold mb-2">
-                  Name <span className="text-vibrant-pink">*</span>
+                <label className="block text-text-dark font-semibold mb-3 text-base">
+                  Your full name <span className="text-vibrant-pink">*</span>
                 </label>
                 <input
                   {...register('name', { required: 'Name is required' })}
                   type="text"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-electric-blue transition-colors"
-                  placeholder="Your full name"
+                  className="w-full px-5 py-4 bg-gray-50 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-electric-blue focus:bg-white transition-all duration-300 text-base"
+                  style={{
+                    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)',
+                  }}
+                  placeholder="John Doe"
                 />
                 {errors.name && (
-                  <p className="text-vibrant-pink text-sm mt-1">
+                  <p className="text-vibrant-pink text-sm mt-2">
                     {errors.name.message}
                   </p>
                 )}
@@ -181,8 +191,8 @@ const ContactSection = () => {
               {/* Email & Phone */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <motion.div variants={staggerItem}>
-                  <label className="block text-text-dark font-semibold mb-2">
-                    Email <span className="text-vibrant-pink">*</span>
+                  <label className="block text-text-dark font-semibold mb-3 text-base">
+                    you@company.com <span className="text-vibrant-pink">*</span>
                   </label>
                   <input
                     {...register('email', {
@@ -193,46 +203,55 @@ const ContactSection = () => {
                       },
                     })}
                     type="email"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-electric-blue transition-colors"
-                    placeholder="you@company.com"
+                    className="w-full px-5 py-4 bg-gray-50 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-electric-blue focus:bg-white transition-all duration-300 text-base"
+                    style={{
+                      boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)',
+                    }}
+                    placeholder="john@company.com"
                   />
                   {errors.email && (
-                    <p className="text-vibrant-pink text-sm mt-1">
+                    <p className="text-vibrant-pink text-sm mt-2">
                       {errors.email.message}
                     </p>
                   )}
                 </motion.div>
 
                 <motion.div variants={staggerItem}>
-                  <label className="block text-text-dark font-semibold mb-2">
-                    Phone
+                  <label className="block text-text-dark font-semibold mb-3 text-base">
+                    +1 (XXX) XXX-XXXX
                   </label>
                   <input
                     {...register('phone')}
                     type="tel"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-electric-blue transition-colors"
-                    placeholder="+1 (XXX) XXX-XXXX"
+                    className="w-full px-5 py-4 bg-gray-50 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-electric-blue focus:bg-white transition-all duration-300 text-base"
+                    style={{
+                      boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)',
+                    }}
+                    placeholder="+1 (555) 123-4567"
                   />
                 </motion.div>
               </div>
 
               {/* Company */}
               <motion.div variants={staggerItem}>
-                <label className="block text-text-dark font-semibold mb-2">
-                  Company
+                <label className="block text-text-dark font-semibold mb-3 text-base">
+                  Your company name
                 </label>
                 <input
                   {...register('company')}
                   type="text"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-electric-blue transition-colors"
-                  placeholder="Your company name"
+                  className="w-full px-5 py-4 bg-gray-50 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-electric-blue focus:bg-white transition-all duration-300 text-base"
+                  style={{
+                    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)',
+                  }}
+                  placeholder="Acme Corp"
                 />
               </motion.div>
 
               {/* Service & Budget */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <motion.div variants={staggerItem}>
-                  <label className="block text-text-dark font-semibold mb-2">
+                  <label className="block text-text-dark font-semibold mb-3 text-base">
                     Service Interested In{' '}
                     <span className="text-vibrant-pink">*</span>
                   </label>
@@ -240,7 +259,10 @@ const ContactSection = () => {
                     {...register('service', {
                       required: 'Please select a service',
                     })}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-electric-blue transition-colors"
+                    className="w-full px-5 py-4 bg-gray-50 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-electric-blue focus:bg-white transition-all duration-300 text-base cursor-pointer"
+                    style={{
+                      boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)',
+                    }}
                   >
                     <option value="">Select a service</option>
                     {services.map((service) => (
@@ -250,19 +272,22 @@ const ContactSection = () => {
                     ))}
                   </select>
                   {errors.service && (
-                    <p className="text-vibrant-pink text-sm mt-1">
+                    <p className="text-vibrant-pink text-sm mt-2">
                       {errors.service.message}
                     </p>
                   )}
                 </motion.div>
 
                 <motion.div variants={staggerItem}>
-                  <label className="block text-text-dark font-semibold mb-2">
+                  <label className="block text-text-dark font-semibold mb-3 text-base">
                     Budget Range
                   </label>
                   <select
                     {...register('budget')}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-electric-blue transition-colors"
+                    className="w-full px-5 py-4 bg-gray-50 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-electric-blue focus:bg-white transition-all duration-300 text-base cursor-pointer"
+                    style={{
+                      boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)',
+                    }}
                   >
                     <option value="">Select budget range</option>
                     {budgetRanges.map((range) => (
@@ -276,34 +301,41 @@ const ContactSection = () => {
 
               {/* Description */}
               <motion.div variants={staggerItem}>
-                <label className="block text-text-dark font-semibold mb-2">
-                  Project Description{' '}
+                <label className="block text-text-dark font-semibold mb-3 text-base">
+                  Tell us about your project, goals, and requirements...{' '}
                   <span className="text-vibrant-pink">*</span>
                 </label>
                 <textarea
                   {...register('description', {
                     required: 'Please describe your project',
                   })}
-                  rows={5}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-electric-blue transition-colors resize-none"
-                  placeholder="Tell us about your project, goals, and any specific requirements..."
+                  rows={6}
+                  className="w-full px-5 py-4 bg-gray-50 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-electric-blue focus:bg-white transition-all duration-300 resize-vertical text-base"
+                  style={{
+                    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)',
+                    minHeight: '150px',
+                  }}
+                  placeholder="Describe your project vision, key features, target audience, timeline, and any other relevant details..."
                 />
                 {errors.description && (
-                  <p className="text-vibrant-pink text-sm mt-1">
+                  <p className="text-vibrant-pink text-sm mt-2">
                     {errors.description.message}
                   </p>
                 )}
               </motion.div>
 
               {/* Submit Button */}
-              <motion.div variants={staggerItem}>
+              <motion.div variants={staggerItem} className="pt-4">
                 <motion.button
-                  whileHover={{ scale: 1.02 }}
+                  whileHover={{ scale: 1.02, y: -2 }}
                   whileTap={{ scale: 0.98 }}
                   type="submit"
-                  className="w-full bg-gradient-to-r from-vibrant-pink to-gold text-white font-bold py-4 px-8 rounded-lg flex items-center justify-center space-x-2 hover:shadow-2xl transition-all duration-300"
+                  className="w-full bg-gradient-to-r from-vibrant-pink to-gold text-white font-bold py-5 px-8 rounded-xl flex items-center justify-center space-x-3 transition-all duration-300 text-lg"
+                  style={{
+                    boxShadow: '0 10px 30px rgba(255, 0, 128, 0.3)',
+                  }}
                 >
-                  <span>Send Message</span>
+                  <span>SEND MESSAGE</span>
                   <Send className="w-5 h-5" />
                 </motion.button>
               </motion.div>
